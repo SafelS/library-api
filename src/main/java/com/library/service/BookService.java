@@ -27,6 +27,7 @@ public class BookService {
         book.setPublicationYear(requestDto.getPublicationYear());
         book.setIsbn(requestDto.getIsbn());
 
+        //TODO Update BookService to match updated BookRequestDTO & BookResponseDTO
         Book savedBook = bookRepository.save(book);
         return new BookResponseDto(savedBook.getId(), author.getId(),savedBook.getTitle(), author.getName(), savedBook.getPublicationYear(), savedBook.getIsbn());
 
