@@ -13,7 +13,7 @@ public class BookResponseDto {
     private Long authorId;
     private String title;
     private String authorName;
-    private int publicationDate;
+    private int publicationYear;
     private String isbn;
 
 

@@ -4,7 +4,6 @@ package com.library.controller;
 import com.library.dto.AuthorRequestDto;
 import com.library.dto.AuthorResponseDto;
 import com.library.service.AuthorService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

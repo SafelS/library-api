@@ -24,12 +24,18 @@ public class BookService {
         Book book = new Book();
         book.setTitle(requestDto.getTitle());
         book.setAuthor(author);
-        book.setPublicationYear(requestDto.getPublicationDate());
+        book.setPublicationYear(requestDto.getPublicationYear());
         book.setIsbn(requestDto.getIsbn());
 
         Book savedBook = bookRepository.save(book);
         return new BookResponseDto(savedBook.getId(), author.getId(),savedBook.getTitle(), author.getName(), savedBook.getPublicationYear(), savedBook.getIsbn());
 
+    }
+
+    public BookResponseDto getBookById(Long id){
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book Not Found"));
+        return new BookResponseDto(book.getId(), book.getAuthor().getId(),
+                book.getTitle(), book.getAuthor().getName(), book.getPublicationYear(), book.getIsbn());
     }
 
 

@@ -9,7 +9,7 @@ public class BookRequestDto {
 
     private String title;
     private String isbn;
-    private int publicationDate;
+    private int publicationYear;
     private Long authorId;
 
 }
