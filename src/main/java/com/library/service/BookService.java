@@ -4,6 +4,7 @@ package com.library.service;
 import com.library.dto.BookRequestDto;
 import com.library.dto.BookResponseDto;
 import com.library.dto.CategoryResponseDto;
+import com.library.exception.ResourceNotFoundException;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Category;
@@ -27,7 +28,7 @@ public class BookService {
 
     public BookResponseDto createBook(BookRequestDto requestDto) {
         Author author = authorRepository.findById(requestDto.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("Author Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Author Not Found"));
 
         Book book = new Book();
         book.setTitle(requestDto.getTitle());

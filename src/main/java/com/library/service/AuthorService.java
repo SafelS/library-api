@@ -3,6 +3,7 @@ package com.library.service;
 
 import com.library.dto.AuthorRequestDto;
 import com.library.dto.AuthorResponseDto;
+import com.library.exception.ResourceNotFoundException;
 import com.library.model.Author;
 import com.library.repository.AuthorRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class AuthorService {
     }
 
     public AuthorResponseDto getAuthorById(Long id){
-        Author author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author Not Found"));
+        Author author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author Not Found"));
         return new AuthorResponseDto(author.getId(), author.getName(), author.getBio());
     }
 }

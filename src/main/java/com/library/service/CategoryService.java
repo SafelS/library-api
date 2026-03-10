@@ -3,6 +3,7 @@ package com.library.service;
 
 import com.library.dto.CategoryRequestDto;
 import com.library.dto.CategoryResponseDto;
+import com.library.exception.ResourceNotFoundException;
 import com.library.model.Category;
 import com.library.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class CategoryService {
     }
 
     public CategoryResponseDto getCategoryById(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category Not Found"));
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category Not Found"));
         return new CategoryResponseDto(category.getId(), category.getName());
     }
 }
