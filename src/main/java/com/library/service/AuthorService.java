@@ -43,4 +43,13 @@ public class AuthorService {
                 map(a -> new AuthorResponseDto(a.getId(), a.getName(), a.getBio())).toList();
 
     }
+
+    public AuthorResponseDto updateAuthor(Long id, AuthorRequestDto requestDto){
+        Author author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author Not Found"));
+        author.setName(requestDto.getName());
+        author.setBio(requestDto.getBio());
+
+        Author updatedAuthor = authorRepository.save(author);
+        return new AuthorResponseDto(updatedAuthor.getId(), updatedAuthor.getName(), updatedAuthor.getBio());
+    }
 }

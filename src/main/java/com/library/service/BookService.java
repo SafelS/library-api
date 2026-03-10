@@ -71,5 +71,20 @@ public class BookService {
         return bookResponseDtos;
     }
 
+    public BookResponseDto updateBook(Long id, BookRequestDto requestDto){
+        Book book = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book Not Found"));
+        book.setTitle(requestDto.getTitle());
+        book.setIsbn(requestDto.getIsbn());
+        book.setPublicationYear(requestDto.getPublicationYear());
+        book.setAuthor(authorRepository.findById(requestDto.getAuthorId()).orElseThrow(()-> new ResourceNotFoundException("Author Not Found")));
+        List<Category> categories = categoryRepository.findAllById(requestDto.getCategoryId());
+        book.setCategories(categories);
+
+        Book updatedBook = bookRepository.save(book);
+        return new BookResponseDto(updatedBook.getId(), updatedBook.getAuthor().getId(), updatedBook.getTitle()
+                , updatedBook.getAuthor().getName(), updatedBook.getPublicationYear(), updatedBook.getIsbn()
+                , updatedBook.getCategories().stream().map(c -> new CategoryResponseDto(c.getId(), c.getName())).toList() );
+    }
+
 
 }

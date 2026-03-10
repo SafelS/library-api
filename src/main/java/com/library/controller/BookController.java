@@ -33,4 +33,9 @@ public class BookController {
     public List<BookResponseDto> getAllBooks(){
         return bookService.getAllBooks();
     }
+
+    @PutMapping("/{id}")
+    public BookResponseDto updateBook(@PathVariable Long id, @RequestBody BookRequestDto request){
+        return bookService.updateBook(id, request);
+    }
 }

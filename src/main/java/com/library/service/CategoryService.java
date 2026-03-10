@@ -36,4 +36,14 @@ public class CategoryService {
         return categoryRepository.findAll().stream()
                 .map(c -> new CategoryResponseDto(c.getId(),c.getName())).toList();
     }
+
+    public CategoryResponseDto updateCategory(Long id, CategoryRequestDto request) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category Not Found"));
+        category.setName(request.getName());
+
+        Category updatedCategory = categoryRepository.save(category);
+
+        return new CategoryResponseDto(updatedCategory.getId(), updatedCategory.getName());
+
+    }
 }

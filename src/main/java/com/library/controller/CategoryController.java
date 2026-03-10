@@ -32,4 +32,9 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+    @PutMapping("/{id}")
+    public CategoryResponseDto updateCategoryById( @PathVariable Long id, @RequestBody CategoryRequestDto request){
+        return categoryService.updateCategory(id, request);
+    }
+
 }
