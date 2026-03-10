@@ -52,4 +52,9 @@ public class AuthorService {
         Author updatedAuthor = authorRepository.save(author);
         return new AuthorResponseDto(updatedAuthor.getId(), updatedAuthor.getName(), updatedAuthor.getBio());
     }
+
+    public void deleteAuthor(Long id){
+        Author author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author Not Found"));
+        authorRepository.delete(author);
+    }
 }

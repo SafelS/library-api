@@ -86,5 +86,10 @@ public class BookService {
                 , updatedBook.getCategories().stream().map(c -> new CategoryResponseDto(c.getId(), c.getName())).toList() );
     }
 
+    public void deleteBook(Long id){
+        Book book = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book Not Found"));
+        bookRepository.delete(book);
+    }
+
 
 }
