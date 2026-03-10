@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/authors")
 @RequiredArgsConstructor
@@ -24,6 +26,11 @@ public class AuthorController {
     @GetMapping("/{id}")
     public AuthorResponseDto getAuthor(@PathVariable Long id){
         return authorService.getAuthorById(id);
+    }
+
+    @GetMapping
+    public List<AuthorResponseDto> getAllAuthors(){
+        return authorService.getAllAuthors();
     }
 
 }

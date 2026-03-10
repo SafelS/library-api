@@ -60,5 +60,16 @@ public class BookService {
                 book.getTitle(), book.getAuthor().getName(), book.getPublicationYear(), book.getIsbn(),  categoryResponseDtos);
     }
 
+    public List<BookResponseDto> getAllBooks(){
+        List<Book> books = bookRepository.findAll();
+
+        List<BookResponseDto> bookResponseDtos = books.stream()
+                .map(b -> new BookResponseDto(b.getId(), b.getAuthor().getId(), b.getTitle(),
+                        b.getAuthor().getName(), b.getPublicationYear(), b.getIsbn(),
+                        b.getCategories().stream().map(c -> new CategoryResponseDto(c.getId(), c.getName())).toList())).toList();
+
+        return bookResponseDtos;
+    }
+
 
 }

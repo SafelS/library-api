@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
@@ -25,5 +27,10 @@ public class BookController {
     @GetMapping("/{id}")
     public BookResponseDto getBook(@PathVariable Long id){
         return bookService.getBookById(id);
+    }
+
+    @GetMapping
+    public List<BookResponseDto> getAllBooks(){
+        return bookService.getAllBooks();
     }
 }

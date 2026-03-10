@@ -9,6 +9,9 @@ import com.library.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -26,5 +29,11 @@ public class CategoryService {
     public CategoryResponseDto getCategoryById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category Not Found"));
         return new CategoryResponseDto(category.getId(), category.getName());
+    }
+
+    public List<CategoryResponseDto> getAllCategories() {
+
+        return categoryRepository.findAll().stream()
+                .map(c -> new CategoryResponseDto(c.getId(),c.getName())).toList();
     }
 }

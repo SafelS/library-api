@@ -9,6 +9,8 @@ import com.library.repository.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AuthorService {
@@ -32,5 +34,13 @@ public class AuthorService {
     public AuthorResponseDto getAuthorById(Long id){
         Author author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author Not Found"));
         return new AuthorResponseDto(author.getId(), author.getName(), author.getBio());
+    }
+
+    public List<AuthorResponseDto> getAllAuthors(){
+        //List<Author> authors = authorRepository.findAll();
+
+        return authorRepository.findAll().stream().
+                map(a -> new AuthorResponseDto(a.getId(), a.getName(), a.getBio())).toList();
+
     }
 }
