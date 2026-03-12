@@ -75,7 +75,7 @@ public class AuthorServiceTest {
     void shouldThrowExceptionWhenAuthorNotFound(){
 
         when(authorRepository.findById(any())).thenReturn(Optional.empty());
-        
+
         assertThrows(ResourceNotFoundException.class, ()->{
             authorService.getAuthorById(1L);
         });
